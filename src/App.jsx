@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Droplet,
   HeartPulse,
@@ -32,10 +32,10 @@ const INSTITUTION_TYPES = [
   { value: "independent_blood_center", label: "مركز دم مستقل" },
 ];
 
- const ACCOUNT_TYPES = [
+const ACCOUNT_TYPES = [
   {
     id: "donor",
-    title:"متبرع بالدم",
+    title: "متبرع بالدم",
     description: "انضم لمجتمع المتبرعين وساهم في إنقاذ الأرواح",
     Icon: Droplet,
     accent: "#af101a",
@@ -44,8 +44,8 @@ const INSTITUTION_TYPES = [
     id: "institution",
     title: "جهة طبية / مستشفى",
     description: "إدارة طلبات الدم وتنسيق الحملات",
-   Icon: HeartPulse,
-    accent: "#005faf" ,
+    Icon: HeartPulse,
+    accent: "#005faf",
   },
 ];
 
@@ -61,14 +61,15 @@ const BACKEND_SERVICE_SCOPE_MAP = {
 
 const GOVERNORATES = [
   { value: "North Gaza", label: "شمال غزة" },
-   { value: "Gaza City", label: "غزة" },
+  { value: "Gaza City", label: "غزة" },
   { value: "Deir al-Balah", label: "دير البلح" },
   { value: "Khan Yunis", label: "خان يونس" },
   { value: "Rafah", label: "رفح" },
 ];
 
 const EMPTY_DONOR_FORM = {
-  fullName: "",nationalId: "",email: "",phone: "",password: "",confirmPassword: "",bloodType: "",governorate: "",terms: false,};
+  fullName: "", nationalId: "", email: "", phone: "", password: "", confirmPassword: "", bloodType: "", governorate: "", terms: false,
+};
 
 function AppHeader({ onBack }) {
   return (
@@ -589,7 +590,7 @@ function EmailVerificationPage({ email, accountType = "donor", onBack, onVerifie
       return next;
     });
     if (value && index < digits.length - 1) {
-       inputsRef.current[index + 1]?.focus();
+      inputsRef.current[index + 1]?.focus();
     }
   };
 
@@ -953,9 +954,8 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
                     style={{ cursor: instStep === 2 ? "pointer" : "default" }}
                   >
                     <div
-                      className={`stepper-circle ${
-                        instStep === 1 ? "active" : "completed"
-                      }`}
+                      className={`stepper-circle ${instStep === 1 ? "active" : "completed"
+                        }`}
                     >
                       {instStep === 1 ? (
                         "1"
@@ -964,30 +964,26 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
                       )}
                     </div>
                     <span
-                      className={`stepper-label ${
-                        instStep === 1 ? "active-label" : "completed-label"
-                      }`}
+                      className={`stepper-label ${instStep === 1 ? "active-label" : "completed-label"
+                        }`}
                     >
                       بيانات المؤسسة
                     </span>
                   </div>
                   <div
-                    className={`stepper-line ${
-                      instStep === 2 ? "active-line" : ""
-                    }`}
+                    className={`stepper-line ${instStep === 2 ? "active-line" : ""
+                      }`}
                   />
                   <div className="stepper-step">
                     <div
-                      className={`stepper-circle ${
-                        instStep === 2 ? "active" : ""
-                      }`}
+                      className={`stepper-circle ${instStep === 2 ? "active" : ""
+                        }`}
                     >
                       2
                     </div>
                     <span
-                      className={`stepper-label ${
-                        instStep === 2 ? "active-label" : ""
-                      }`}
+                      className={`stepper-label ${instStep === 2 ? "active-label" : ""
+                        }`}
                     >
                       الخدمات والوثائق
                     </span>
@@ -1280,9 +1276,8 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
 
                     <div className="service-scope-grid">
                       <label
-                        className={`service-scope-card ${
-                          serviceScope === "blood_request_only" ? "active" : ""
-                        }`}
+                        className={`service-scope-card ${serviceScope === "blood_request_only" ? "active" : ""
+                          }`}
                         onClick={() => setServiceScope("blood_request_only")}
                       >
                         <input
@@ -1300,9 +1295,8 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
                       </label>
 
                       <label
-                        className={`service-scope-card ${
-                          serviceScope === "blood_bank_only" ? "active" : ""
-                        }`}
+                        className={`service-scope-card ${serviceScope === "blood_bank_only" ? "active" : ""
+                          }`}
                         onClick={() => setServiceScope("blood_bank_only")}
                       >
                         <input
@@ -1322,9 +1316,8 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
                       </label>
 
                       <label
-                        className={`service-scope-card ${
-                          serviceScope === "both" ? "active" : ""
-                        }`}
+                        className={`service-scope-card ${serviceScope === "both" ? "active" : ""
+                          }`}
                         onClick={() => setServiceScope("both")}
                       >
                         <input
@@ -1443,9 +1436,8 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
                         return (
                           <div
                             key={doc.id}
-                            className={`doc-upload-box ${
-                              file ? "uploaded" : ""
-                            }`}
+                            className={`doc-upload-box ${file ? "uploaded" : ""
+                              }`}
                           >
                             <input
                               type="file"
