@@ -107,7 +107,7 @@ function LoginPage({ onCreateAccount, onLoginSuccess }) {
     setIsLoading(true);
 
     try {
-      const res = await authApi.login({ email: email.trim(), password });
+      const res = await authApi.login({ login: email.trim(), password });
       if (onLoginSuccess) {
         onLoginSuccess(res);
       } else {
@@ -1569,11 +1569,218 @@ function InstitutionRegistrationPage({ onBack, onLogin, onSubmitSuccess }) {
   );
 }
 
+/* ────────────────────────────────────────────
+   لوحة تحكم المتبرع
+──────────────────────────────────────────── */
+function DonorDashboard({ user, onLogout }) {
+  return (
+    <div dir="rtl" lang="ar" className="qatra-app">
+      <header className="header">
+        <div className="header-inner">
+          <a href="#" className="logo">Qatra</a>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span style={{ color: "#af101a", fontWeight: 600, fontSize: "0.9rem" }}>
+              🩸 {user?.name || "متبرع"}
+            </span>
+            <button className="login-btn" onClick={onLogout}>تسجيل الخروج</button>
+          </div>
+        </div>
+      </header>
+
+      <main className="main" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "80vh" }}>
+        <div style={{ textAlign: "center", padding: "2rem", maxWidth: "500px" }}>
+          <div style={{
+            width: "100px", height: "100px", borderRadius: "50%",
+            background: "linear-gradient(135deg, #af101a, #e53935)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            margin: "0 auto 1.5rem", fontSize: "2.5rem",
+            boxShadow: "0 8px 32px rgba(175,16,26,0.3)"
+          }}>🩸</div>
+
+          <h1 style={{ color: "#af101a", fontSize: "2rem", marginBottom: "0.5rem" }}>
+            مرحباً، {user?.name || "متبرع"}
+          </h1>
+          <p style={{ color: "#888", fontSize: "1rem", marginBottom: "2rem" }}>
+            أنت الآن في لوحة تحكم المتبرع
+          </p>
+
+          <div style={{
+            padding: "1.5rem 2rem",
+            background: "rgba(175,16,26,0.06)",
+            borderRadius: "16px",
+            border: "1px dashed rgba(175,16,26,0.3)",
+          }}>
+            <p style={{ color: "#af101a", fontWeight: 600, margin: 0 }}>
+              🚧 لوحة تحكم المتبرع قيد الإنشاء
+            </p>
+            <p style={{ color: "#999", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+              ستتمكن قريباً من إدارة تبرعاتك ومتابعة طلبات الدم
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────
+   لوحة تحكم المستشفى / الجهة الطبية
+──────────────────────────────────────────── */
+function InstitutionDashboard({ user, onLogout }) {
+  return (
+    <div dir="rtl" lang="ar" className="qatra-app">
+      <header className="header">
+        <div className="header-inner">
+          <a href="#" className="logo">Qatra</a>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span style={{ color: "#005faf", fontWeight: 600, fontSize: "0.9rem" }}>
+              🏥 {user?.name || "جهة طبية"}
+            </span>
+            <button className="login-btn" onClick={onLogout}>تسجيل الخروج</button>
+          </div>
+        </div>
+      </header>
+
+      <main className="main" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "80vh" }}>
+        <div style={{ textAlign: "center", padding: "2rem", maxWidth: "500px" }}>
+          <div style={{
+            width: "100px", height: "100px", borderRadius: "50%",
+            background: "linear-gradient(135deg, #005faf, #1976d2)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            margin: "0 auto 1.5rem", fontSize: "2.5rem",
+            boxShadow: "0 8px 32px rgba(0,95,175,0.3)"
+          }}>🏥</div>
+
+          <h1 style={{ color: "#005faf", fontSize: "2rem", marginBottom: "0.5rem" }}>
+            مرحباً، {user?.name || "جهة طبية"}
+          </h1>
+          <p style={{ color: "#888", fontSize: "1rem", marginBottom: "2rem" }}>
+            أنت الآن في لوحة تحكم الجهة الطبية
+          </p>
+
+          <div style={{
+            padding: "1.5rem 2rem",
+            background: "rgba(0,95,175,0.06)",
+            borderRadius: "16px",
+            border: "1px dashed rgba(0,95,175,0.3)",
+          }}>
+            <p style={{ color: "#005faf", fontWeight: 600, margin: 0 }}>
+              🚧 لوحة تحكم المستشفى قيد الإنشاء
+            </p>
+            <p style={{ color: "#999", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+              ستتمكن قريباً من إدارة طلبات الدم وتنسيق الحملات
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────
+   لوحة تحكم المشرف
+──────────────────────────────────────────── */
+function AdminDashboard({ user, onLogout }) {
+  return (
+    <div dir="rtl" lang="ar" className="qatra-app">
+      <header className="header">
+        <div className="header-inner">
+          <a href="#" className="logo">Qatra</a>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span style={{ color: "#6a1b9a", fontWeight: 600, fontSize: "0.9rem" }}>
+              🛡️ {user?.name || "مشرف"}
+            </span>
+            <button className="login-btn" onClick={onLogout}>تسجيل الخروج</button>
+          </div>
+        </div>
+      </header>
+
+      <main className="main" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "80vh" }}>
+        <div style={{ textAlign: "center", padding: "2rem", maxWidth: "500px" }}>
+          <div style={{
+            width: "100px", height: "100px", borderRadius: "50%",
+            background: "linear-gradient(135deg, #6a1b9a, #9c27b0)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            margin: "0 auto 1.5rem", fontSize: "2.5rem",
+            boxShadow: "0 8px 32px rgba(106,27,154,0.3)"
+          }}>🛡️</div>
+
+          <h1 style={{ color: "#6a1b9a", fontSize: "2rem", marginBottom: "0.5rem" }}>
+            مرحباً، {user?.name || "مشرف"}
+          </h1>
+          <p style={{ color: "#888", fontSize: "1rem", marginBottom: "2rem" }}>
+            أنت الآن في لوحة تحكم المشرف
+          </p>
+
+          <div style={{
+            padding: "1.5rem 2rem",
+            background: "rgba(106,27,154,0.06)",
+            borderRadius: "16px",
+            border: "1px dashed rgba(106,27,154,0.3)",
+          }}>
+            <p style={{ color: "#6a1b9a", fontWeight: 600, margin: 0 }}>
+              🚧 لوحة تحكم المشرف قيد الإنشاء
+            </p>
+            <p style={{ color: "#999", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+              ستتمكن قريباً من إدارة المستخدمين والإشراف على المنصة
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────
+   موجّه الـ Dashboard — يختار الصفحة حسب نوع الحساب
+──────────────────────────────────────────── */
+function DashboardPage({ user, onLogout }) {
+  const type = user?.account_type;
+
+  if (type === "donor") {
+    return <DonorDashboard user={user} onLogout={onLogout} />;
+  }
+
+  if (type === "health_institution") {
+    return <InstitutionDashboard user={user} onLogout={onLogout} />;
+  }
+
+  if (type === "health_authority_admin") {
+    return <AdminDashboard user={user} onLogout={onLogout} />;
+  }
+
+  // fallback — نوع غير معروف، نعرض كامل الداتا لتشخيص المشكلة
+  return (
+    <div dir="rtl" lang="ar" className="qatra-app">
+      <header className="header">
+        <div className="header-inner">
+          <a href="#" className="logo">Qatra</a>
+          <button className="login-btn" onClick={onLogout}>تسجيل الخروج</button>
+        </div>
+      </header>
+      <main className="main" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "80vh" }}>
+        <div style={{ textAlign: "center", color: "#999", maxWidth: "600px", padding: "2rem" }}>
+          <p style={{ fontSize: "1.1rem", color: "#af101a", fontWeight: 600 }}>🔍 بيانات الحساب المستلمة من الباكند:</p>
+          <pre style={{
+            background: "#1a1a2e", color: "#00ff88", padding: "1.5rem",
+            borderRadius: "12px", textAlign: "left", direction: "ltr",
+            fontSize: "0.85rem", overflowX: "auto", marginTop: "1rem"
+          }}>
+            {JSON.stringify(user, null, 2)}
+          </pre>
+          <button className="login-btn" onClick={onLogout} style={{ marginTop: "1.5rem" }}>تسجيل الخروج</button>
+        </div>
+      </main>
+    </div>
+  );
+}
+
 export default function App() {
   const [selected, setSelected] = useState(null);
-  const [step, setStep] = useState("login"); // 'login' | 'home' | 'donorForm' | 'institutionForm' | 'verifyEmail'
+  const [step, setStep] = useState("login"); // 'login' | 'home' | 'donorForm' | 'institutionForm' | 'verifyEmail' | 'dashboard'
   const [donorEmail, setDonorEmail] = useState("");
   const [verifyAccountType, setVerifyAccountType] = useState("donor");
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const handleContinue = () => {
     if (!selected) return;
@@ -1592,8 +1799,31 @@ export default function App() {
     alert(`تم اختيار نوع الحساب: ${type.title}`);
   };
 
+  if (step === "dashboard") {
+    return (
+      <DashboardPage
+        user={loggedInUser}
+        onLogout={() => {
+          setLoggedInUser(null);
+          setStep("login");
+        }}
+      />
+    );
+  }
+
   if (step === "login") {
-    return <LoginPage onCreateAccount={() => setStep("home")} />;
+    return (
+      <LoginPage
+        onCreateAccount={() => setStep("home")}
+        onLoginSuccess={(res) => {
+          const user = res?.data?.user || res?.user || res;
+          const token = res?.data?.token || res?.token;
+          if (token) localStorage.setItem("auth_token", token);
+          setLoggedInUser(user);
+          setStep("dashboard");
+        }}
+      />
+    );
   }
 
   if (step === "donorForm") {
